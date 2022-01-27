@@ -62,7 +62,7 @@ class DoubleLinkedList{
         break;
       temp = temp.next;
     }
-    if(temp.next)
+    if(temp?.next)
     {
       let deletedNode = temp.next;
       temp.next = deletedNode.next;
@@ -94,10 +94,10 @@ export default class App extends Component {
   {
     this.intialSliders();
     console.log(this.state.Slider)
-    let timeout = 5000
-    this.timer = setInterval(() => {
-      this.showNextSlide();
-    }, timeout);
+    // let timeout = 5000
+    // this.timer = setInterval(() => {
+    //   this.showNextSlide();
+    // }, timeout);
   }
 
   intialSliders = () => {
@@ -175,30 +175,46 @@ export default class App extends Component {
 
      <div style={{margin: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
        <div className="component">
-        <h2 style={{textAlign: 'center'}}>Add Slider</h2>
+        <h2 className="comp-head">Add Slider</h2>
         <hr />
-        <input type="file" onChange={(event) => this.handleChange(event)}/>
+        <div style={{margin: '10px'}}>
+        <input type="file" className="chooser" onChange={(event) => this.handleChange(event)}/>           
+        
         {this.state.file &&
           <>
-          <img className="slider-image" src={this.state.file} /> 
-          <button onClick={() => this.insertData(this.state.file)}>Upload</button>
+            <div className="image-opener-div">
+              <img style={{marginTop: '5px'}} className="slider-image" src={this.state.file} /> 
+            </div>
+            <button className="insert-btn" onClick={() => this.insertData(this.state.file)}>Upload</button>  
           </>
         }
+          </div>
 
        </div>
 
        <div className="component">
-        <h2 style={{textAlign: 'center'}}>Delete Slider</h2>
+        <h2 className="comp-head">Delete Slider</h2>
         <hr />
         <div style={{margin: '10px', display: 'flex'}}>
           <input type="text" id="deleteText" placeholder="Enter banner Position" className="textt" />
-          <button onClick={() => this.deleteData(document.getElementById('deleteText').value)}>Delete</button>
+          <button className="dlt-btn" onClick={() => this.deleteData(document.getElementById('deleteText').value)}>Delete</button>
         </div>
 
        </div>
      </div>
 
-     
+     {/* <div className="slider-container">
+        {this.state.Slider.head ?
+          <video  width="90%" height="400" controls>
+            <source src={video} type="video/mp4"></source>
+          </video>
+        
+        : <img className="slider-image" src={require('./images/no-image.png').default} />
+        }
+     </div> */}
+
+
+
     </div>
     );
   }
